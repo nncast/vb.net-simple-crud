@@ -9,7 +9,6 @@ It serves as a learning tool or starter template for developers working with Win
 - Visual Studio (2012 or later)
 - .NET Framework (.NET Framework 4.8.1 or later)
 - SQL Server (Express or full version)
-- SQL DLL
 
 ---
 Developed by Janelle Ann Castillo (nncast)
