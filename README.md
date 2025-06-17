@@ -5,10 +5,22 @@ simpleCRUD is a lightweight, desktop-based application built with VB.NET, showca
 It serves as a learning tool or starter template for developers working with Windows Forms and database-driven applications.
 
 **Requirements**
-
 - Visual Studio (2012 or later)
-- .NET Framework (.NET Framework 4.8.1 or later)
-- SQL Server (Express or full version)
+- .NET Framework 4.8.1 or later
+- MySQL (via XAMPP, WAMP, or standalone)
+- SQLYog (or any MySQL client)
+- MySQL .NET Connector (MySql.Data.dll)
+
+**Installation Instructions**
+1. Download and extract the project .zip file.
+2. Start MySQL using XAMPP (or your preferred server stack).
+3. Open SQLYog, connect to your local MySQL server.
+4. Import the .sql file from the sql folder to create the database and tables.
+5. Open simpleCRUD.sln in Visual Studio.
+6. Before running, make sure your system has .NET Framework 4.8.1 or later installed.
+      - [Download .NET Framework 4.8.1](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481)
+7. Build and run the project.
+
 
 ---
 Developed by Janelle Ann Castillo (nncast)
