@@ -14,8 +14,8 @@ It serves as a learning tool or starter template for developers working with Win
 **Installation Instructions**
 1. Download and extract the project .zip file.
 2. Start MySQL using XAMPP (or your preferred server stack).
-3. Open SQLYog, connect to your local MySQL server.
-4. Import the .sql file from the sql folder to create the database and tables.
+3. Open SQLYog and connect to your MySQL server locally.
+4. Import the .sql file inside the sql folder to create the database and tables.
 5. Open simpleCRUD.sln in Visual Studio.
 6. Before running, make sure:
       - Your system has .NET Framework 4.8.1 or later installed.
