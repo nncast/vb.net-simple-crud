@@ -23,5 +23,8 @@ It serves as a learning tool or starter template for developers working with Win
       - The MySQL .NET Connector (MySql.Data.dll) is referenced in your project:
 7. Build and run the project.
 
+Preview:
+https://github.com/user-attachments/assets/8d3c5e43-d802-4e27-aa82-6e3bef9c8311
+
 ---
 Developed by Janelle Ann Castillo (nncast)
