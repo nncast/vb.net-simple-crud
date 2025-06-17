@@ -18,7 +18,7 @@ It serves as a learning tool or starter template for developers working with Win
 4. Import the .sql file inside the sql folder to create the database and tables.
 5. Open simpleCRUD.sln in Visual Studio.
 6. Before running, make sure:
-      - Your system has .NET Framework 4.8.1 or later installed.
+      - Your system has .NET Framework 4.8.1 or later installed and running on the project
             - [Download .NET Framework 4.8.1](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481)
       - The MySQL .NET Connector (MySql.Data.dll) is referenced in your project:
 7. Build and run the project.
