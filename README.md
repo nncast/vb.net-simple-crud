@@ -4,8 +4,7 @@
 simpleCRUD is a lightweight, desktop-based application built with VB.NET, showcasing fundamental Create, Read, Update, and Delete (CRUD) operations integrated with an SQL Server backend.
 It serves as a learning tool or starter template for developers working with Windows Forms and database-driven applications.
 
-Preview Video:
-https://github.com/user-attachments/assets/290f07dc-d021-4e7c-8e06-206559e5519f
+[Preview Video](https://www.youtube.com/watch?v=6MIb-sQymHw)
 
 **Requirements**
 - Visual Studio (2012 or later)
