@@ -6,6 +6,13 @@ It serves as a learning tool or starter template for developers working with Win
 
 [Preview Video](https://www.youtube.com/watch?v=6MIb-sQymHw)
 
+**Features**
+- Basic Create, Read, Update, Delete (CRUD) operations
+- Clean and simple Windows Forms interface
+- MySQL database integration using MySql.Data.dll
+- Displays data with ListView
+- Includes a reusable database connection class
+
 **Requirements**
 - Visual Studio (2012 or later)
 - .NET Framework 4.8.1 or later
