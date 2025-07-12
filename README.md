@@ -15,8 +15,10 @@ Designed primarily as a learning tool or starter template for developers working
 **Requirements**
 - Visual Studio (2012 or later)
 - .NET Framework 4.8.1 or later
-      - [`Download .NET Framework 4.8.1`](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481)
-- MySQL (via XAMPP, WAMP, or standalone)
+      - [Download .NET Framework 4.8.1](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481)
+- XAMPP/WAMP
+      - [XAMPP](https://www.apachefriends.org/index.html)
+      - [WAMP](https://www.wampserver.com/en/)
 - SQLYog (or any MySQL client)
 - MySQL .NET Connector `MySql.Data.dll`
 
