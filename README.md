@@ -17,7 +17,7 @@ Designed primarily as a learning tool or starter template for developers working
 - .NET Framework 4.8.1 or later
       - [Download .NET Framework 4.8.1](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481)
 - XAMPP/WAMP
--     - Your system has .NET Framework 4.8.1 or later installed and running on the project
+      - Your system has .NET Framework 4.8.1 or later installed and running on the project
       - [XAMPP](https://www.apachefriends.org/index.html)
       - [WAMP](https://www.wampserver.com/en/)
 - SQLYog (or any MySQL client)
