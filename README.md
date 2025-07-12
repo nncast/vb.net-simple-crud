@@ -11,7 +11,6 @@ It is intended as a learning resource or starter template for developers buildin
 - Simple Windows Forms user interface
 - MySQL database integration using `MySql.Data.dll`
 - Data display using `ListView`
-- Reusable database connection class
 
 ## Requirements
 - Visual Studio 2012 or later  
