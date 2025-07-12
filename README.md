@@ -17,9 +17,8 @@ Designed primarily as a learning tool or starter template for developers working
 - .NET Framework 4.8.1 or later
       - [Download .NET Framework 4.8.1](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481)
 - XAMPP/WAMP
-      - Your system has .NET Framework 4.8.1 or later installed and running on the project
-      - [XAMPP](https://www.apachefriends.org/index.html)
-      - [WAMP](https://www.wampserver.com/en/)
+      - [Download XAMPP](https://www.apachefriends.org/index.html)
+      - [Download WAMP](https://www.wampserver.com/en/)     
 - SQLYog (or any MySQL client)
 - MySQL .NET Connector `MySql.Data.dll`
 
@@ -28,10 +27,10 @@ Designed primarily as a learning tool or starter template for developers working
 2. Start MySQL using XAMPP/WAMP, or your preferred server stack.
 3. Open SQLYog and import the `.sql` file inside the sql folder to create the database and tables.
 4. Open the project by launching simpleCRUD.sln in Visual Studio.
-5. Before running the application, ensure the following:
+5. Before running the application, ensure the following:    
       - Your system has .NET Framework 4.8.1 or later installed and running on the project
       - The MySQL .NET Connector (MySql.Data.dll) is added and referenced in your project:
-6. Build and run the project.
+7. Build and run the project.
 
 ---
 Developed by Janelle Ann Castillo (nncast)
