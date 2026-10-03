@@ -115,7 +115,7 @@
                 SetQuery("DELETE FROM schedules WHERE schedid='" & cid & "'")
                 fill()
                 clearfields()
-                schedid = Nothing
+                cid = Nothing
                 MsgBox("Deleted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
             End If
         End If
@@ -128,7 +128,7 @@
                 disablebuttons()
                 clearfields()
                 pnlinput.Enabled = False
-                schedid = Nothing
+                cid = Nothing
             End If
         ElseIf adding Then
             If MsgBox("Are you sure you want to cancel adding new schedule information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Cancel") = MsgBoxResult.Yes Then
@@ -136,10 +136,10 @@
                 disablebuttons()
                 clearfields()
                 pnlinput.Enabled = False
-                schedid = Nothing
+                cid = Nothing
             End If
         Else
-            schedid = Nothing
+            cid = Nothing
             adding = False
             updating = False
             disablebuttons()
