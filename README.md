@@ -52,7 +52,7 @@ Every form works the same way:
 ## Project structure
 
 ```
-sql/
+database/
   dbstudent.sql             Database schema + sample data
 simpleCRUD/
   simpleCRUD.sln            Visual Studio solution
@@ -99,9 +99,9 @@ All primary keys are `AUTO_INCREMENT`.
    git clone https://github.com/nncast/vb.net-simple-crud.git
    ```
 2. Start MySQL using XAMPP, WAMP, or another server stack.
-3. Import `sql/dbstudent.sql` with your MySQL client, or from the CLI:
+3. Import `database/dbstudent.sql` with your MySQL client, or from the CLI:
    ```bash
-   mysql -u root -p < sql/dbstudent.sql
+   mysql -u root -p < database/dbstudent.sql
    ```
 4. Open `simpleCRUD/simpleCRUD.sln` in Visual Studio.
 5. Make sure the project targets .NET Framework 4.8.1 or later and that `MySql.Data.dll` is referenced. If it shows a warning icon under *References*, remove it and add it again from wherever Connector/NET is installed on your machine.
