@@ -120,7 +120,7 @@
 
                 fill()
                 clearfields()
-                id = Nothing
+                cid = Nothing
                 MsgBox("Deleted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
             End If
         End If
@@ -133,7 +133,7 @@
                 disablebuttons()
                 clearfields()
                 pnlinput.Enabled = False
-                id = Nothing
+                cid = Nothing
             End If
         ElseIf adding Then
             If MsgBox("Are you sure you want to cancel adding new classroom information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Cancel") = MsgBoxResult.Yes Then
@@ -141,7 +141,7 @@
                 disablebuttons()
                 clearfields()
                 pnlinput.Enabled = False
-                id = Nothing
+                cid = Nothing
             End If
         Else
             adding = False
@@ -149,7 +149,7 @@
             disablebuttons()
             clearfields()
             pnlinput.Enabled = False
-            id = Nothing
+            cid = Nothing
         End If
     End Sub
 
