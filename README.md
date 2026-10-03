@@ -18,7 +18,15 @@
 **simpleCRUD** is a lightweight desktop application built with VB.NET, demonstrating basic Create, Read, Update, and Delete (CRUD) operations using a MySQL database. It manages basic school records — **Classrooms, Courses, Departments, Instructors and Schedules** — each in its own form.
 It is intended as a learning resource or starter template for developers building Windows Forms applications with database integration.
 
-> **Current version: v0.1.0** — first tagged release. See [Releases](https://github.com/nncast/vb.net-simple-crud/releases) for the project timeline.
+> **Current version: v0.1.0** — first tagged release. See [Releases](https://github.com/nncast/vb.net-simple-crud/releases) for the release notes.
+
+<p align="center">
+  <img src="assets/screenshots/classrooms.png" width="400" alt="Classrooms form"/>
+  <img src="assets/screenshots/courses.png" width="400" alt="Courses form"/>
+  <img src="assets/screenshots/departments.png" width="400" alt="Departments form"/>
+  <img src="assets/screenshots/instructors.png" width="400" alt="Instructors form"/>
+  <img src="assets/screenshots/schedules.png" width="400" alt="Schedules form"/>
+</p>
 
 ## Features
 
@@ -122,10 +130,6 @@ The app opens the **Schedules** form by default, and there is no main menu linki
   ```
   To keep the setting after a restart, add `sql_mode = NO_ENGINE_SUBSTITUTION` under `[mysqld]` in your `my.ini` (in XAMPP: *Config → my.ini* on the MySQL row).
 - **`Unable to connect to any of the specified MySQL hosts`.** Make sure MySQL is running (e.g. started from the XAMPP Control Panel) and that the connection settings match your server.
-
-## Developer
-
-Janelle Ann Castillo ([nncast](https://github.com/nncast))
 
 ---
 
