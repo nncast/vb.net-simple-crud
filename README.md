@@ -1,7 +1,7 @@
 <h1 align="center">simpleCRUD</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.0-14b8a6?style=flat-square" alt="version">
+  <img src="https://img.shields.io/badge/version-0.1.1-14b8a6?style=flat-square" alt="version">
   <img src="https://img.shields.io/badge/status-complete-2772BD?style=flat-square" alt="status">
   <img src="https://img.shields.io/badge/VB.NET-Windows_Forms-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt="VB.NET">
   <img src="https://img.shields.io/badge/.NET_Framework-4.8.1-5C2D91?style=flat-square&logo=dotnet&logoColor=white" alt=".NET Framework">
@@ -9,8 +9,9 @@
 </p>
 
 <p align="center">
-  <b>Download v0.1.0:</b>
-  <a href="https://github.com/nncast/vb.net-simple-crud/archive/refs/tags/v0.1.0.zip">Source (.zip)</a> ·
+  <b>Download v0.1.1:</b>
+  <a href="https://github.com/nncast/vb.net-simple-crud/releases/download/v0.1.1/simpleCRUD-v0.1.1-Windows.zip">Windows (.zip)</a> ·
+  <a href="https://github.com/nncast/vb.net-simple-crud/archive/refs/tags/v0.1.1.zip">Source (.zip)</a> ·
   <a href="https://www.youtube.com/watch?v=6MIb-sQymHw">Preview Video</a> |
   <a href="https://github.com/nncast/vb.net-simple-crud/releases">All releases</a>
 </p>
@@ -18,7 +19,7 @@
 **simpleCRUD** is a lightweight desktop application built with VB.NET, demonstrating basic Create, Read, Update, and Delete (CRUD) operations using a MySQL database. It manages basic school records — **Classrooms, Courses, Departments, Instructors and Schedules** — each in its own form.
 It is intended as a learning resource or starter template for developers building Windows Forms applications with database integration.
 
-> **Current version: v0.1.0** — first tagged release. See [Releases](https://github.com/nncast/vb.net-simple-crud/releases) for the release notes.
+> **Current version: v0.1.1** — bug-fix and security release: every query is parameterized, saving works with MySQL strict mode, the connection settings live in a config file, and there is a ready-to-run Windows build. See [Releases](https://github.com/nncast/vb.net-simple-crud/releases) for the release notes.
 
 <p align="center">
   <img src="assets/screenshots/classrooms.png" width="400" alt="Classrooms form"/>
@@ -64,8 +65,10 @@ database/
   dbstudent.sql             Database schema + sample data
 simpleCRUD/
   simpleCRUD.sln            Visual Studio solution
+  lib/MySql.Data.dll        MySQL Connector/NET used by the project
   simpleCRUD/
-    Conn.vb                 Shared DB module: Connect, GetQuery (SELECT), SetQuery (INSERT/UPDATE/DELETE)
+    App.config              Database connection string (StudentDb)
+    Conn.vb                 Shared DB module: opens the connection from App.config; parameterized GetQuery (SELECT) / SetQuery (INSERT/UPDATE/DELETE)
     Classrooms.vb           Classrooms CRUD form
     Courses.vb              Courses CRUD form
     Departments.vb          Departments CRUD form
@@ -98,38 +101,37 @@ All primary keys are `AUTO_INCREMENT`.
 | .NET Framework 4.8.1 or later | [dotnet.microsoft.com](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net481) |
 | XAMPP or WAMP (for MySQL) | [XAMPP](https://www.apachefriends.org/index.html) · [WAMP](https://www.wampserver.com/en/) |
 | SQLYog or any MySQL client | [SQLYog](https://github.com/webyog/sqlyog-community/wiki/Downloads) |
-| MySQL .NET Connector (`MySql.Data.dll`) | [Connector/NET](https://dev.mysql.com/downloads/connector/net/) |
+| MySQL .NET Connector (`MySql.Data.dll`) | Included in `lib/` (from [Connector/NET](https://dev.mysql.com/downloads/connector/net/)) |
 
 ## Setup and run instructions
 
-1. Clone the repository, or download the [source .zip](https://github.com/nncast/vb.net-simple-crud/archive/refs/tags/v0.1.0.zip).
+**Windows build (no Visual Studio needed)**
+
+1. Download [`simpleCRUD-v0.1.1-Windows.zip`](https://github.com/nncast/vb.net-simple-crud/releases/download/v0.1.1/simpleCRUD-v0.1.1-Windows.zip) from the [v0.1.1 release](https://github.com/nncast/vb.net-simple-crud/releases/tag/v0.1.1) and extract it.
+2. Start MySQL (XAMPP, WAMP, or another server) and import `database/dbstudent.sql` from the extracted folder.
+3. If your MySQL server, port, user or password differ from `localhost:3306` / `root` / no password, open `simpleCRUD.exe.config` in Notepad and edit the `StudentDb` connection string.
+4. Run `simpleCRUD.exe`.
+
+**From source**
+
+1. Clone the repository, or download the [source .zip](https://github.com/nncast/vb.net-simple-crud/archive/refs/tags/v0.1.1.zip).
    ```bash
    git clone https://github.com/nncast/vb.net-simple-crud.git
    ```
 2. Start MySQL using XAMPP, WAMP, or another server stack.
-3. Import `database/dbstudent.sql` with your MySQL client, or from the CLI:
+3. Import `database/dbstudent.sql` with SQLYog or another MySQL client, or from the CLI:
    ```bash
    mysql -u root -p < database/dbstudent.sql
    ```
 4. Open `simpleCRUD/simpleCRUD.sln` in Visual Studio.
-5. Make sure the project targets .NET Framework 4.8.1 or later and that `MySql.Data.dll` is referenced. If it shows a warning icon under *References*, remove it and add it again from wherever Connector/NET is installed on your machine.
-6. Check the connection settings. Each form connects with:
-   ```vb
-   Connect("localhost", "dbstudent", "3306", "root", "")
-   ```
-   Change the server, port, username or password in each form's `_Load` event if yours are different.
-7. Build and run the project.
+5. If your MySQL settings differ from the defaults, edit the `StudentDb` connection string in `simpleCRUD/simpleCRUD/App.config`. `MySql.Data.dll` ships in the repository's `lib` folder, so nothing else needs to be installed for the reference.
+6. Build and run the project.
 
 The app opens the **Schedules** form by default, and there is no main menu linking the forms. To open another module, go to **Project → simpleCRUD Properties → Application → Startup form** and pick `Classrooms`, `Courses`, `Departments`, or `Instructors`.
 
 ## Troubleshooting
 
-- **`Incorrect integer value: '' for column ...` when saving a new record.** The Add forms send an empty ID and rely on MySQL filling in the next auto-increment number, which strict mode blocks. Turn strict mode off:
-  ```sql
-  SET GLOBAL sql_mode = 'NO_ENGINE_SUBSTITUTION';
-  ```
-  To keep the setting after a restart, add `sql_mode = NO_ENGINE_SUBSTITUTION` under `[mysqld]` in your `my.ini` (in XAMPP: *Config → my.ini* on the MySQL row).
-- **`Unable to connect to any of the specified MySQL hosts`.** Make sure MySQL is running (e.g. started from the XAMPP Control Panel) and that the connection settings match your server.
+- **`Unable to connect to any of the specified MySQL hosts`.** Make sure MySQL is running (e.g. started from the XAMPP Control Panel) and that the `StudentDb` connection string in `simpleCRUD.exe.config` (or `App.config` when building) matches your server.
 
 ---
 

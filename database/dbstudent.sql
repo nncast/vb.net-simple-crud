@@ -16,11 +16,8 @@
 --  The five tables are independent — no form joins or looks up another
 --  table, so there are no foreign keys between them.
 --
---  NOTE: the Add forms send the (empty, disabled) ID textbox as '' for the
---  id column, relying on MySQL turning that into the next AUTO_INCREMENT
---  value. That only works when the server is NOT in strict mode. If saving
---  a new record fails with "Incorrect integer value: '' for column ...",
---  turn strict mode off (see README > Troubleshooting).
+--  IDs are AUTO_INCREMENT: the Add forms leave the id column out of their
+--  INSERTs, so this works with MySQL strict mode on or off.
 --
 --  Import this before running the app (SQLYog / phpMyAdmin / mysql CLI):
 --      mysql -u root -p < dbstudent.sql
@@ -118,8 +115,8 @@ INSERT INTO courses (coursename, credits, coursetype) VALUES
   ('Web Development', 3, 'Elective');
 
 INSERT INTO departments (deptname, depthead, phonenum, officelocation) VALUES
-  ('Computer Science', 'Maria Santos', '0917-123-4567', 'Building A'),
-  ('Mathematics', 'Jose Reyes', '0918-765-4321', 'Building C');
+  ('Computer Science', 'Maria Santos', '555-1234', 'Building A'),
+  ('Mathematics', 'Jose Reyes', '555-5678', 'Building C');
 
 INSERT INTO instructors (fname, lname, email) VALUES
   ('Ana', 'Cruz', 'ana.cruz@example.com'),

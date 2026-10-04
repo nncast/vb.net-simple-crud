@@ -2,12 +2,11 @@
 
     Public adding As Boolean = False
     Public updating As Boolean = False
-    Public id As Integer = Nothing
     Private cid As Integer = Nothing
 
 
     Private Sub Schedules_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Connect("localhost", "dbstudent", "3306", "root", "")
+        Connect()
 
         fill()
         btnnew.Enabled = True
@@ -52,28 +51,36 @@
     Private Sub btnnew_Click(sender As Object, e As EventArgs) Handles btnnew.Click
         enablebuttons()
         clearfields()
+        cid = Nothing
         pnlinput.Enabled = True
         adding = True
     End Sub
 
     Private Sub btnupdate_Click(sender As Object, e As EventArgs) Handles btnupdate.Click
+        If cid = Nothing Then
+            MsgBox("Select a schedule to update", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            Exit Sub
+        End If
+
         enablebuttons()
         updating = True
         pnlinput.Enabled = True
     End Sub
 
     Private Sub btnsave_Click(sender As Object, e As EventArgs) Handles btnsave.Click
-        If adding Then
-            If cmbdayofweek.Text = Nothing Or dtptimeslot.Text = Nothing Then
-                MsgBox("All Fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
-            Else
-                If MsgBox("Are you sure you want to add a new schedule?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
-                    SetQuery("INSERT INTO schedules (dayofweek, timeslot) VALUES('" & cmbdayofweek.Text.Trim & "', '" & dtptimeslot.Text & "')")
+        If cmbdayofweek.Text.Trim = "" Then
+            MsgBox("All Fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            Exit Sub
+        End If
 
+        If adding Then
+            If MsgBox("Are you sure you want to add a new schedule?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+                If SetQuery("INSERT INTO schedules (dayofweek, timeslot) VALUES (@dayofweek, @timeslot)",
+                            P("@dayofweek", cmbdayofweek.Text.Trim), P("@timeslot", dtptimeslot.Text)) Then
                     fill()
                     disablebuttons()
                     clearfields()
-                    pnlinput.Enabled = True
+                    pnlinput.Enabled = False
                     adding = False
                     updating = False
                     MsgBox("Saved", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
@@ -81,22 +88,27 @@
             End If
         ElseIf updating Then
             If MsgBox("Are you sure you want to update schedule information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
-                SetQuery("UPDATE schedules SET dayofweek='" & cmbdayofweek.Text.Trim & "', timeslot='" & dtptimeslot.Text & "' WHERE schedid='" & cid & "'")
-
-                fill()
-                disablebuttons()
-                clearfields()
-                pnlinput.Enabled = True
-                adding = False
-                updating = False
-                MsgBox("Updated", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                If SetQuery("UPDATE schedules SET dayofweek = @dayofweek, timeslot = @timeslot WHERE schedid = @id",
+                            P("@dayofweek", cmbdayofweek.Text.Trim), P("@timeslot", dtptimeslot.Text), P("@id", cid)) Then
+                    fill()
+                    disablebuttons()
+                    clearfields()
+                    pnlinput.Enabled = False
+                    adding = False
+                    updating = False
+                    cid = Nothing
+                    MsgBox("Updated", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                End If
             End If
         End If
     End Sub
 
     Private Sub schedview_DoubleClick(sender As Object, e As EventArgs) Handles schedview.DoubleClick
-        cid = schedview.FocusedItem.SubItems(0).Text
-        GetQuery("SELECT * FROM schedules WHERE schedid='" & cid & "'", "schedules")
+        If adding Or updating Or schedview.SelectedItems.Count = 0 Then Exit Sub
+
+        cid = CInt(schedview.SelectedItems(0).SubItems(0).Text)
+        GetQuery("SELECT * FROM schedules WHERE schedid = @id", "schedules", P("@id", cid))
+        If ds.Tables("schedules").Rows.Count = 0 Then Exit Sub
 
         txtschedid.Text = ds.Tables("schedules").Rows(0).Item("schedid").ToString
         cmbdayofweek.Text = ds.Tables("schedules").Rows(0).Item("dayofweek").ToString
@@ -112,11 +124,13 @@
             MsgBox("Select schedule to delete", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
         Else
             If MsgBox("Are you sure you want to delete this record?", MsgBoxStyle.Information + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
-                SetQuery("DELETE FROM schedules WHERE schedid='" & cid & "'")
-                fill()
-                clearfields()
-                cid = Nothing
-                MsgBox("Deleted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                If SetQuery("DELETE FROM schedules WHERE schedid = @id", P("@id", cid)) Then
+                    fill()
+                    clearfields()
+                    cid = Nothing
+                    disablebuttons()
+                    MsgBox("Deleted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                End If
             End If
         End If
     End Sub
