@@ -24,9 +24,9 @@ It is intended as a learning resource or starter template for developers buildin
 <p align="center">
   <img src="assets/screenshots/classrooms.png" width="400" alt="Classrooms form"/>
   <img src="assets/screenshots/courses.png" width="400" alt="Courses form"/>
-  <img src="assets/screenshots/departments.png" width="400" alt="Departments form"/>
   <img src="assets/screenshots/instructors.png" width="400" alt="Instructors form"/>
   <img src="assets/screenshots/schedules.png" width="400" alt="Schedules form"/>
+    <img src="assets/screenshots/departments.png" width="400" alt="Departments form"/>
 </p>
 
 ## Features
