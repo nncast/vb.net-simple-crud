@@ -1,7 +1,7 @@
 <h1 align="center">simpleCRUD</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.1-03658C?style=flat-square" alt="version">
+  <img src="https://img.shields.io/badge/version-0.1.2-03658C?style=flat-square" alt="version">
   <img src="https://img.shields.io/badge/status-complete-03658C?style=flat-square" alt="status">
   <img src="https://img.shields.io/badge/VB.NET-Windows_Forms-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt="VB.NET">
   <img src="https://img.shields.io/badge/.NET_Framework-4.8.1-512BD4?style=flat-square&logo=dotnet&logoColor=white" alt=".NET Framework">
@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <b>Download v0.1.1:</b>
-  <a href="https://github.com/nncast/vb.net-simple-crud/releases/download/v0.1.1/simpleCRUD-v0.1.1-Windows.zip">Windows (.zip)</a> ·
-  <a href="https://github.com/nncast/vb.net-simple-crud/archive/refs/tags/v0.1.1.zip">Source (.zip)</a> ·
+  <b>Download v0.1.2:</b>
+  <a href="https://github.com/nncast/vb.net-simple-crud/releases/download/v0.1.2/simpleCRUD-v0.1.2-Windows.zip">Windows (.zip)</a> ·
+  <a href="https://github.com/nncast/vb.net-simple-crud/archive/refs/tags/v0.1.2.zip">Source (.zip)</a> ·
   <a href="https://www.youtube.com/watch?v=6MIb-sQymHw">Preview Video</a> |
   <a href="https://github.com/nncast/vb.net-simple-crud/releases">All releases</a>
 </p>
@@ -19,7 +19,7 @@
 **simpleCRUD** is a lightweight desktop application built with VB.NET, demonstrating basic Create, Read, Update, and Delete (CRUD) operations using a MySQL database. It manages basic school records — **Classrooms, Courses, Departments, Instructors and Schedules** — each in its own form.
 It is intended as a learning resource or starter template for developers building Windows Forms applications with database integration.
 
-> **Current version: v0.1.1** — bug-fix and security release: every query is parameterized, saving works with MySQL strict mode, the connection settings live in a config file, and there is a ready-to-run Windows build. See [Releases](https://github.com/nncast/vb.net-simple-crud/releases) for the release notes.
+> **Current version: v0.1.2** — documentation update; the app is unchanged from v0.1.1, the bug-fix and security release: every query is parameterized, saving works with MySQL strict mode, the connection settings live in a config file, and there is a ready-to-run Windows build. See [Releases](https://github.com/nncast/vb.net-simple-crud/releases) for the release notes.
 
 <p align="center">
   <img src="assets/screenshots/classrooms.png" width="400" alt="Classrooms form"/>
@@ -107,14 +107,14 @@ All primary keys are `AUTO_INCREMENT`.
 
 **Windows build (no Visual Studio needed)**
 
-1. Download [`simpleCRUD-v0.1.1-Windows.zip`](https://github.com/nncast/vb.net-simple-crud/releases/download/v0.1.1/simpleCRUD-v0.1.1-Windows.zip) from the [v0.1.1 release](https://github.com/nncast/vb.net-simple-crud/releases/tag/v0.1.1) and extract it.
+1. Download [`simpleCRUD-v0.1.2-Windows.zip`](https://github.com/nncast/vb.net-simple-crud/releases/download/v0.1.2/simpleCRUD-v0.1.2-Windows.zip) from the [v0.1.2 release](https://github.com/nncast/vb.net-simple-crud/releases/tag/v0.1.2) and extract it.
 2. Start MySQL (XAMPP, WAMP, or another server) and import `database/dbstudent.sql` from the extracted folder.
 3. If your MySQL server, port, user or password differ from `localhost:3306` / `root` / no password, open `simpleCRUD.exe.config` in Notepad and edit the `StudentDb` connection string.
 4. Run `simpleCRUD.exe`.
 
 **From source**
 
-1. Clone the repository, or download the [source .zip](https://github.com/nncast/vb.net-simple-crud/archive/refs/tags/v0.1.1.zip).
+1. Clone the repository, or download the [source .zip](https://github.com/nncast/vb.net-simple-crud/archive/refs/tags/v0.1.2.zip).
    ```bash
    git clone https://github.com/nncast/vb.net-simple-crud.git
    ```
