@@ -134,7 +134,6 @@
         txtcapacity.Text = ds.Tables("classrooms").Rows(0).Item("capacity").ToString
         txtequipment.Text = ds.Tables("classrooms").Rows(0).Item("equipment").ToString
 
-        btnnew.Enabled = False
         btnupdate.Enabled = True
         btndelete.Enabled = True
     End Sub

@@ -130,7 +130,6 @@
         txtphonenum.Text = ds.Tables("departments").Rows(0).Item("phonenum").ToString
         cmbofficelocation.Text = ds.Tables("departments").Rows(0).Item("officelocation").ToString
 
-        btnnew.Enabled = False
         btnupdate.Enabled = True
         btndelete.Enabled = True
     End Sub
