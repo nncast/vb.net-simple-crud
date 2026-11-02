@@ -137,7 +137,6 @@
         txtlname.Text = ds.Tables("instructors").Rows(0).Item("lname").ToString
         txtemail.Text = ds.Tables("instructors").Rows(0).Item("email").ToString
 
-        btnnew.Enabled = False
         btnupdate.Enabled = True
         btndelete.Enabled = True
     End Sub

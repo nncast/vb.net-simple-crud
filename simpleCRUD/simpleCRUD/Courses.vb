@@ -130,7 +130,6 @@
         numcredits.Text = ds.Tables("courses").Rows(0).Item("credits").ToString
         cmbcoursetype.Text = ds.Tables("courses").Rows(0).Item("coursetype").ToString
 
-        btnnew.Enabled = False
         btnupdate.Enabled = True
         btndelete.Enabled = True
     End Sub

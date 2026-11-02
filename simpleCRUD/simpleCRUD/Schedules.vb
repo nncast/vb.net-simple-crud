@@ -116,7 +116,6 @@
         cmbdayofweek.Text = ds.Tables("schedules").Rows(0).Item("dayofweek").ToString
         dtptimeslot.Text = ds.Tables("schedules").Rows(0).Item("timeslot").ToString
 
-        btnnew.Enabled = False
         btnupdate.Enabled = True
         btndelete.Enabled = True
     End Sub
