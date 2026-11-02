@@ -55,7 +55,22 @@
             Return False
         End If
 
+        If Not IsValidEmail(txtemail.Text.Trim) Then
+            MsgBox("Enter a valid email address, e.g. name@example.com.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            Return False
+        End If
+
         Return True
+    End Function
+
+    ' True for an address like name@example.com.
+    Private Function IsValidEmail(email As String) As Boolean
+        If email.Contains(" ") OrElse Not email.Contains("@") Then Return False
+        Try
+            Return New Net.Mail.MailAddress(email).Address = email
+        Catch ex As FormatException
+            Return False
+        End Try
     End Function
 
     Private Sub btnnew_Click(sender As Object, e As EventArgs) Handles btnnew.Click
