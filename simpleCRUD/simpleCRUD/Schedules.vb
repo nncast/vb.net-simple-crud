@@ -60,7 +60,7 @@
 
     Private Sub btnupdate_Click(sender As Object, e As EventArgs) Handles btnupdate.Click
         If cid = Nothing Then
-            MsgBox("Select a schedule to update", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Select a schedule to update.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "No Selection")
             Exit Sub
         End If
 
@@ -71,12 +71,12 @@
 
     Private Sub btnsave_Click(sender As Object, e As EventArgs) Handles btnsave.Click
         If cmbdayofweek.Text.Trim = "" Then
-            MsgBox("All Fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("All fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Missing Information")
             Exit Sub
         End If
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new schedule?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to add a new schedule?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 If SetQuery("INSERT INTO schedules (dayofweek, timeslot) VALUES (@dayofweek, @timeslot)",
                             P("@dayofweek", cmbdayofweek.Text.Trim), P("@timeslot", dtptimeslot.Text)) Then
                     fill()
@@ -85,11 +85,11 @@
                     pnlinput.Enabled = False
                     adding = False
                     updating = False
-                    MsgBox("Saved", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Schedule added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update schedule information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to update schedule information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 If SetQuery("UPDATE schedules SET dayofweek = @dayofweek, timeslot = @timeslot WHERE schedid = @id",
                             P("@dayofweek", cmbdayofweek.Text.Trim), P("@timeslot", dtptimeslot.Text), P("@id", cid)) Then
                     fill()
@@ -99,7 +99,7 @@
                     adding = False
                     updating = False
                     cid = Nothing
-                    MsgBox("Updated", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Schedule updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         End If
@@ -122,15 +122,15 @@
 
     Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btndelete.Click
         If cid = Nothing Then
-            MsgBox("Select schedule to delete", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Select a schedule to delete.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "No Selection")
         Else
-            If MsgBox("Are you sure you want to delete this record?", MsgBoxStyle.Information + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to delete this schedule?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm Delete") = MsgBoxResult.Yes Then
                 If SetQuery("DELETE FROM schedules WHERE schedid = @id", P("@id", cid)) Then
                     fill()
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Deleted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Schedule deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         End If
