@@ -6,6 +6,8 @@
 
     Private Sub Courses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Connect()
+        ' Only the listed choices are valid, so the box can't be typed into.
+        cmbcoursetype.DropDownStyle = ComboBoxStyle.DropDownList
 
         fill()
         btnnew.Enabled = True
