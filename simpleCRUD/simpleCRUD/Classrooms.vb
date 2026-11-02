@@ -54,13 +54,13 @@
 
     Private Function validfields() As Boolean
         If cmbbldgname.Text.Trim = "" Or txtroomnum.Text.Trim = "" Or txtcapacity.Text.Trim = "" Or txtequipment.Text.Trim = "" Then
-            MsgBox("All Fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("All fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Missing Information")
             Return False
         End If
 
         Dim capacity As Integer
         If Not Integer.TryParse(txtcapacity.Text.Trim, capacity) OrElse capacity <= 0 Then
-            MsgBox("Capacity must be a whole number greater than zero.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Capacity must be a whole number greater than zero.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Validation Error")
             Return False
         End If
 
@@ -77,7 +77,7 @@
 
     Private Sub btnupdate_Click(sender As Object, e As EventArgs) Handles btnupdate.Click
         If cid = Nothing Then
-            MsgBox("Select a classroom to update", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Select a classroom to update.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "No Selection")
             Exit Sub
         End If
 
@@ -90,7 +90,7 @@
         If Not validfields() Then Exit Sub
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new classroom?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to add a new classroom?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 If SetQuery("INSERT INTO classrooms (bldgname, roomnum, capacity, equipment) VALUES (@bldgname, @roomnum, @capacity, @equipment)",
                             P("@bldgname", cmbbldgname.Text.Trim), P("@roomnum", txtroomnum.Text.Trim),
                             P("@capacity", CInt(txtcapacity.Text.Trim)), P("@equipment", txtequipment.Text.Trim)) Then
@@ -100,11 +100,11 @@
                     pnlinput.Enabled = False
                     adding = False
                     updating = False
-                    MsgBox("Saved", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Classroom added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update classroom information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to update classroom information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 If SetQuery("UPDATE classrooms SET bldgname = @bldgname, roomnum = @roomnum, capacity = @capacity, equipment = @equipment WHERE classid = @id",
                             P("@bldgname", cmbbldgname.Text.Trim), P("@roomnum", txtroomnum.Text.Trim),
                             P("@capacity", CInt(txtcapacity.Text.Trim)), P("@equipment", txtequipment.Text.Trim), P("@id", cid)) Then
@@ -115,7 +115,7 @@
                     adding = False
                     updating = False
                     cid = Nothing
-                    MsgBox("Updated", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Classroom updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         End If
@@ -140,15 +140,15 @@
 
     Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btndelete.Click
         If cid = Nothing Then
-            MsgBox("Select classroom to delete", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Select a classroom to delete.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "No Selection")
         Else
-            If MsgBox("Are you sure you want to delete this record?", MsgBoxStyle.Information + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to delete this classroom?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm Delete") = MsgBoxResult.Yes Then
                 If SetQuery("DELETE FROM classrooms WHERE classid = @id", P("@id", cid)) Then
                     fill()
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Deleted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Classroom deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         End If

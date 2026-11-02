@@ -54,12 +54,12 @@
 
     Private Function validfields() As Boolean
         If txtcoursename.Text.Trim = "" Or cmbcoursetype.Text.Trim = "" Then
-            MsgBox("All Fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("All fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Missing Information")
             Return False
         End If
 
         If numcredits.Value <= 0 Then
-            MsgBox("Credits must be greater than zero.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Credits must be greater than zero.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Validation Error")
             Return False
         End If
 
@@ -76,7 +76,7 @@
 
     Private Sub btnupdate_Click(sender As Object, e As EventArgs) Handles btnupdate.Click
         If cid = Nothing Then
-            MsgBox("Select a course to update", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Select a course to update.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "No Selection")
             Exit Sub
         End If
 
@@ -89,7 +89,7 @@
         If Not validfields() Then Exit Sub
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new course?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to add a new course?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 If SetQuery("INSERT INTO courses (coursename, credits, coursetype) VALUES (@coursename, @credits, @coursetype)",
                             P("@coursename", txtcoursename.Text.Trim), P("@credits", CInt(numcredits.Value)), P("@coursetype", cmbcoursetype.Text.Trim)) Then
                     fill()
@@ -98,11 +98,11 @@
                     pnlinput.Enabled = False
                     adding = False
                     updating = False
-                    MsgBox("Saved", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Course added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update course information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to update course information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 If SetQuery("UPDATE courses SET coursename = @coursename, credits = @credits, coursetype = @coursetype WHERE courseid = @id",
                             P("@coursename", txtcoursename.Text.Trim), P("@credits", CInt(numcredits.Value)), P("@coursetype", cmbcoursetype.Text.Trim), P("@id", cid)) Then
                     fill()
@@ -112,7 +112,7 @@
                     adding = False
                     updating = False
                     cid = Nothing
-                    MsgBox("Updated", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Course updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         End If
@@ -136,15 +136,15 @@
 
     Private Sub btndelete_Click(sender As Object, e As EventArgs) Handles btndelete.Click
         If cid = Nothing Then
-            MsgBox("Select course to delete", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Select a course to delete.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "No Selection")
         Else
-            If MsgBox("Are you sure you want to delete this record?", MsgBoxStyle.Information + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to delete this course?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm Delete") = MsgBoxResult.Yes Then
                 If SetQuery("DELETE FROM courses WHERE courseid = @id", P("@id", cid)) Then
                     fill()
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Deleted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Course deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         End If

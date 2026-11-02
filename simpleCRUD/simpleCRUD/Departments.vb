@@ -56,7 +56,7 @@
     Private Function validfields() As Boolean
         ' An empty masked box still returns its "-" literal, so check MaskCompleted.
         If txtdeptname.Text.Trim = "" Or txtdepthead.Text.Trim = "" Or cmbofficelocation.Text.Trim = "" Or Not txtphonenum.MaskCompleted Then
-            MsgBox("All Fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("All fields are required!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Missing Information")
             Return False
         End If
 
@@ -73,7 +73,7 @@
 
     Private Sub btnupdate_Click(sender As Object, e As EventArgs) Handles btnupdate.Click
         If cid = Nothing Then
-            MsgBox("Select a department to update", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Select a department to update.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "No Selection")
             Exit Sub
         End If
 
@@ -86,7 +86,7 @@
         If Not validfields() Then Exit Sub
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new department?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to add a new department?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 If SetQuery("INSERT INTO departments (deptname, depthead, phonenum, officelocation) VALUES (@deptname, @depthead, @phonenum, @officelocation)",
                             P("@deptname", txtdeptname.Text.Trim), P("@depthead", txtdepthead.Text.Trim),
                             P("@phonenum", txtphonenum.Text.Trim), P("@officelocation", cmbofficelocation.Text.Trim)) Then
@@ -96,11 +96,11 @@
                     pnlinput.Enabled = False
                     adding = False
                     updating = False
-                    MsgBox("Saved", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Department added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update department information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to update department information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
                 If SetQuery("UPDATE departments SET deptname = @deptname, depthead = @depthead, phonenum = @phonenum, officelocation = @officelocation WHERE deptid = @id",
                             P("@deptname", txtdeptname.Text.Trim), P("@depthead", txtdepthead.Text.Trim),
                             P("@phonenum", txtphonenum.Text.Trim), P("@officelocation", cmbofficelocation.Text.Trim), P("@id", cid)) Then
@@ -111,7 +111,7 @@
                     adding = False
                     updating = False
                     cid = Nothing
-                    MsgBox("Updated", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Department updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         End If
@@ -136,15 +136,15 @@
 
     Private Sub btndelete_Click_1(sender As Object, e As EventArgs) Handles btndelete.Click
         If cid = Nothing Then
-            MsgBox("Select department to delete", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+            MsgBox("Select a department to delete.", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "No Selection")
         Else
-            If MsgBox("Are you sure you want to delete this record?", MsgBoxStyle.Information + MsgBoxStyle.YesNo, "") = MsgBoxResult.Yes Then
+            If MsgBox("Are you sure you want to delete this department?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm Delete") = MsgBoxResult.Yes Then
                 If SetQuery("DELETE FROM departments WHERE deptid = @id", P("@id", cid)) Then
                     fill()
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Deleted", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "")
+                    MsgBox("Department deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
                 End If
             End If
         End If
