@@ -96,31 +96,27 @@
         If Not validfields() Then Exit Sub
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new instructor?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("INSERT INTO instructors (fname, lname, email) VALUES (@fname, @lname, @email)",
-                            P("@fname", txtfname.Text.Trim), P("@lname", txtlname.Text.Trim), P("@email", txtemail.Text.Trim)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    MsgBox("Instructor added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("INSERT INTO instructors (fname, lname, email) VALUES (@fname, @lname, @email)",
+                        P("@fname", txtfname.Text.Trim), P("@lname", txtlname.Text.Trim), P("@email", txtemail.Text.Trim)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                Toast.Notify("Instructor added successfully!")
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update instructor information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("UPDATE instructors SET fname = @fname, lname = @lname, email = @email WHERE instrid = @id",
-                            P("@fname", txtfname.Text.Trim), P("@lname", txtlname.Text.Trim), P("@email", txtemail.Text.Trim), P("@id", cid)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    cid = Nothing
-                    MsgBox("Instructor updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("UPDATE instructors SET fname = @fname, lname = @lname, email = @email WHERE instrid = @id",
+                        P("@fname", txtfname.Text.Trim), P("@lname", txtlname.Text.Trim), P("@email", txtemail.Text.Trim), P("@id", cid)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                cid = Nothing
+                Toast.Notify("Instructor updated successfully!")
             End If
         End If
     End Sub
@@ -151,7 +147,7 @@
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Instructor deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
+                    Toast.Notify("Instructor deleted successfully!")
                 End If
             End If
         End If

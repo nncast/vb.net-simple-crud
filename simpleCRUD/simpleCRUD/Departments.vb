@@ -86,33 +86,29 @@
         If Not validfields() Then Exit Sub
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new department?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("INSERT INTO departments (deptname, depthead, phonenum, officelocation) VALUES (@deptname, @depthead, @phonenum, @officelocation)",
-                            P("@deptname", txtdeptname.Text.Trim), P("@depthead", txtdepthead.Text.Trim),
-                            P("@phonenum", txtphonenum.Text.Trim), P("@officelocation", cmbofficelocation.Text.Trim)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    MsgBox("Department added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("INSERT INTO departments (deptname, depthead, phonenum, officelocation) VALUES (@deptname, @depthead, @phonenum, @officelocation)",
+                        P("@deptname", txtdeptname.Text.Trim), P("@depthead", txtdepthead.Text.Trim),
+                        P("@phonenum", txtphonenum.Text.Trim), P("@officelocation", cmbofficelocation.Text.Trim)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                Toast.Notify("Department added successfully!")
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update department information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("UPDATE departments SET deptname = @deptname, depthead = @depthead, phonenum = @phonenum, officelocation = @officelocation WHERE deptid = @id",
-                            P("@deptname", txtdeptname.Text.Trim), P("@depthead", txtdepthead.Text.Trim),
-                            P("@phonenum", txtphonenum.Text.Trim), P("@officelocation", cmbofficelocation.Text.Trim), P("@id", cid)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    cid = Nothing
-                    MsgBox("Department updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("UPDATE departments SET deptname = @deptname, depthead = @depthead, phonenum = @phonenum, officelocation = @officelocation WHERE deptid = @id",
+                        P("@deptname", txtdeptname.Text.Trim), P("@depthead", txtdepthead.Text.Trim),
+                        P("@phonenum", txtphonenum.Text.Trim), P("@officelocation", cmbofficelocation.Text.Trim), P("@id", cid)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                cid = Nothing
+                Toast.Notify("Department updated successfully!")
             End If
         End If
     End Sub
@@ -144,7 +140,7 @@
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Department deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
+                    Toast.Notify("Department deleted successfully!")
                 End If
             End If
         End If

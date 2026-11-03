@@ -89,31 +89,27 @@
         If Not validfields() Then Exit Sub
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new course?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("INSERT INTO courses (coursename, credits, coursetype) VALUES (@coursename, @credits, @coursetype)",
-                            P("@coursename", txtcoursename.Text.Trim), P("@credits", CInt(numcredits.Value)), P("@coursetype", cmbcoursetype.Text.Trim)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    MsgBox("Course added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("INSERT INTO courses (coursename, credits, coursetype) VALUES (@coursename, @credits, @coursetype)",
+                        P("@coursename", txtcoursename.Text.Trim), P("@credits", CInt(numcredits.Value)), P("@coursetype", cmbcoursetype.Text.Trim)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                Toast.Notify("Course added successfully!")
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update course information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("UPDATE courses SET coursename = @coursename, credits = @credits, coursetype = @coursetype WHERE courseid = @id",
-                            P("@coursename", txtcoursename.Text.Trim), P("@credits", CInt(numcredits.Value)), P("@coursetype", cmbcoursetype.Text.Trim), P("@id", cid)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    cid = Nothing
-                    MsgBox("Course updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("UPDATE courses SET coursename = @coursename, credits = @credits, coursetype = @coursetype WHERE courseid = @id",
+                        P("@coursename", txtcoursename.Text.Trim), P("@credits", CInt(numcredits.Value)), P("@coursetype", cmbcoursetype.Text.Trim), P("@id", cid)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                cid = Nothing
+                Toast.Notify("Course updated successfully!")
             End If
         End If
     End Sub
@@ -144,7 +140,7 @@
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Course deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
+                    Toast.Notify("Course deleted successfully!")
                 End If
             End If
         End If

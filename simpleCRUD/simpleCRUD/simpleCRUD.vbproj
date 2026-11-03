@@ -105,6 +105,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Conn.vb" />
+    <Compile Include="Toast.vb" />
     <Compile Include="Courses.vb">
       <SubType>Form</SubType>
     </Compile>
