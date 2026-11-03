@@ -76,31 +76,27 @@
         End If
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new schedule?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("INSERT INTO schedules (dayofweek, timeslot) VALUES (@dayofweek, @timeslot)",
-                            P("@dayofweek", cmbdayofweek.Text.Trim), P("@timeslot", dtptimeslot.Text)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    MsgBox("Schedule added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("INSERT INTO schedules (dayofweek, timeslot) VALUES (@dayofweek, @timeslot)",
+                        P("@dayofweek", cmbdayofweek.Text.Trim), P("@timeslot", dtptimeslot.Text)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                Toast.Notify("Schedule added successfully!")
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update schedule information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("UPDATE schedules SET dayofweek = @dayofweek, timeslot = @timeslot WHERE schedid = @id",
-                            P("@dayofweek", cmbdayofweek.Text.Trim), P("@timeslot", dtptimeslot.Text), P("@id", cid)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    cid = Nothing
-                    MsgBox("Schedule updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("UPDATE schedules SET dayofweek = @dayofweek, timeslot = @timeslot WHERE schedid = @id",
+                        P("@dayofweek", cmbdayofweek.Text.Trim), P("@timeslot", dtptimeslot.Text), P("@id", cid)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                cid = Nothing
+                Toast.Notify("Schedule updated successfully!")
             End If
         End If
     End Sub
@@ -130,7 +126,7 @@
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Schedule deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
+                    Toast.Notify("Schedule deleted successfully!")
                 End If
             End If
         End If

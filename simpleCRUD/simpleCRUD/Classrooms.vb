@@ -90,33 +90,29 @@
         If Not validfields() Then Exit Sub
 
         If adding Then
-            If MsgBox("Are you sure you want to add a new classroom?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("INSERT INTO classrooms (bldgname, roomnum, capacity, equipment) VALUES (@bldgname, @roomnum, @capacity, @equipment)",
-                            P("@bldgname", cmbbldgname.Text.Trim), P("@roomnum", txtroomnum.Text.Trim),
-                            P("@capacity", CInt(txtcapacity.Text.Trim)), P("@equipment", txtequipment.Text.Trim)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    MsgBox("Classroom added successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("INSERT INTO classrooms (bldgname, roomnum, capacity, equipment) VALUES (@bldgname, @roomnum, @capacity, @equipment)",
+                        P("@bldgname", cmbbldgname.Text.Trim), P("@roomnum", txtroomnum.Text.Trim),
+                        P("@capacity", CInt(txtcapacity.Text.Trim)), P("@equipment", txtequipment.Text.Trim)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                Toast.Notify("Classroom added successfully!")
             End If
         ElseIf updating Then
-            If MsgBox("Are you sure you want to update classroom information?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirm") = MsgBoxResult.Yes Then
-                If SetQuery("UPDATE classrooms SET bldgname = @bldgname, roomnum = @roomnum, capacity = @capacity, equipment = @equipment WHERE classid = @id",
-                            P("@bldgname", cmbbldgname.Text.Trim), P("@roomnum", txtroomnum.Text.Trim),
-                            P("@capacity", CInt(txtcapacity.Text.Trim)), P("@equipment", txtequipment.Text.Trim), P("@id", cid)) Then
-                    fill()
-                    disablebuttons()
-                    clearfields()
-                    pnlinput.Enabled = False
-                    adding = False
-                    updating = False
-                    cid = Nothing
-                    MsgBox("Classroom updated successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
-                End If
+            If SetQuery("UPDATE classrooms SET bldgname = @bldgname, roomnum = @roomnum, capacity = @capacity, equipment = @equipment WHERE classid = @id",
+                        P("@bldgname", cmbbldgname.Text.Trim), P("@roomnum", txtroomnum.Text.Trim),
+                        P("@capacity", CInt(txtcapacity.Text.Trim)), P("@equipment", txtequipment.Text.Trim), P("@id", cid)) Then
+                fill()
+                disablebuttons()
+                clearfields()
+                pnlinput.Enabled = False
+                adding = False
+                updating = False
+                cid = Nothing
+                Toast.Notify("Classroom updated successfully!")
             End If
         End If
     End Sub
@@ -148,7 +144,7 @@
                     clearfields()
                     cid = Nothing
                     disablebuttons()
-                    MsgBox("Classroom deleted successfully!", MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Success")
+                    Toast.Notify("Classroom deleted successfully!")
                 End If
             End If
         End If
