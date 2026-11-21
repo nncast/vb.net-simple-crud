@@ -19,7 +19,7 @@
 **simpleCRUD** is a lightweight desktop application built with VB.NET, demonstrating basic Create, Read, Update, and Delete (CRUD) operations using a MySQL database. It manages basic school records — **Classrooms, Courses, Departments, Instructors and Schedules** — each in its own form.
 It is intended as a learning resource or starter template for developers building Windows Forms applications with database integration.
 
-> **Current version: v0.2.1** — the program's file properties now show its real version instead of 1.0.0.0. Built on v0.2.0: fewer clicks. Save just saves, with no "Are you sure?" first, and a short notice that fades on its own replaces the "…successfully!" box you had to click away. Deleting, logging out and cancelling unsaved work still ask. Built on v0.1.3: pick-only choices, email check, clearer messages. Built on v0.1.2: documentation update; the app is unchanged from v0.1.1, the bug-fix and security release: every query is parameterized, saving works with MySQL strict mode, the connection settings live in a config file, and there is a ready-to-run Windows build. See [Releases](https://github.com/nncast/vb.net-simple-crud/releases) for the release notes.
+> **Current version: v0.2.1** — fewer clicks: Save just saves, and a notice that fades on its own replaces the "…successfully!" box. See [Releases](https://github.com/nncast/vb.net-simple-crud/releases) for what changed in each version.
 
 <p align="center">
   <img src="assets/screenshots/classrooms.png" width="400" alt="Classrooms form"/>
